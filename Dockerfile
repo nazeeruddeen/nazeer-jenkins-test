@@ -1,10 +1,15 @@
+# Use a JDK runtime as a parent image
+FROM openjdk:17-jdk-slim
 
-FROM eclipse-temurin:17-jdk-alpine
-
+# Set the working directory in the container
 WORKDIR /app
 
-COPY target/docker-0.0.1-SNAPSHOT.jar app.jar
+# Copy the built jar file into the container
+# Note: Ensure the path matches what Maven built
+COPY target/jenkins-0.0.1-SNAPSHOT.jar app.jar
 
+# Expose the port
 EXPOSE 8080
 
-ENTR  YPOINT ["java","-jar","app.jar"]
+# The command to run the app
+ENTRYPOINT ["java","-jar","app.jar"]
