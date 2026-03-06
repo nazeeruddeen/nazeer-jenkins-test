@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-git-jenkins-docker
+  labels:
+    app: spring-git-jenkins-docker
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: spring-git-jenkins-docker
+  template:
+    metadata:
+      labels:
+        app: spring-git-jenkins-docker
+    spec:
+      containers:
+        - name: spring-git-jenkins-docker
+          # IMPORTANT: This must match what you see on your Docker Hub account
+          image: nazeer018/nazeer-springboot-jenkins:latest
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: Always
